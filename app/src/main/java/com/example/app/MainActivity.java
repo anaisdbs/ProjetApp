@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,7 +14,9 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+    private SharedPreferences sharedPreferences;
+    private Gson gson;
 
     static final String BASE_URL = "https://world.openfoodfacts.org/";
 
@@ -36,7 +42,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*        EditText coderentré = (EditText)findViewById(R.id.mon_code_barre);
+        sharedPreferences = getSharedPreferences("application_anais", Context.MODE_PRIVATE);
+
+
+         gson = new GsonBuilder()
+                .setLenient()
+                .create();
+        List<Ingredients> ingredientsList = getDataFromCache();
+
+        if(ingredientsList != null){
+             showList(ingredientsList);
+         }else{
+             makeApiCall();
+
+         }
+
+/*      EditText coderentré = (EditText)findViewById(R.id.mon_code_barre);
         IngredientCode code= new IngredientCode();
         code.setCode(coderentré.getText().toString());
 
@@ -50,8 +71,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Toast.makeText(this, (CharSequence) code, Toast.LENGTH_SHORT ).show();
 
-        makeApiCall();
     }
+
+    private List<Ingredients> getDataFromCache(){
+        String jsonIngredient = sharedPreferences.getString("jsonIngredientsList", null);
+        if(jsonIngredient == null){
+            return null;
+        }else {
+            Type listType = new TypeToken<List<Ingredients>>() {
+            }.getType();
+            return gson.fromJson(jsonIngredient, listType);
+        }
+
+    }
+
     private void showError() {
         Toast.makeText(this,"Api Erreur", Toast.LENGTH_SHORT ).show();
     }
@@ -70,9 +103,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
     }
     private void makeApiCall(){
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
+
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -87,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
+                    saveList(ingredientsList);
                     showList(ingredientsList);
 
                 } else{
@@ -98,5 +130,14 @@ public class MainActivity extends AppCompatActivity {
                 showError();
             }
         });
+    }
+
+    private void saveList(List<Ingredients> ingredientsList) {
+        String jsonString = gson.toJson(ingredientsList);
+        sharedPreferences
+                .edit()
+                .putString("jsonIngredientsList", jsonString)
+                .apply();
+        Toast.makeText(this,"Données sauvegardée", Toast.LENGTH_SHORT ).show();
     }
 }
