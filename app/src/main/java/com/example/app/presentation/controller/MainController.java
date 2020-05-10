@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.widget.Toast;
 
 import com.example.app.Constant;
+import com.example.app.Singletons;
 import com.example.app.data.FoodApi;
 import com.example.app.presentation.model.Ingredients;
 import com.example.app.presentation.model.ResFoodResponse;
@@ -39,23 +40,19 @@ public class MainController {
 
         List<Ingredients> ingredientsList = getDataFromCache();
 
-        if(ingredientsList != null){
+       /* if(ingredientsList != null){
             view.showList(ingredientsList);
         }else{
-            makeApiCall();
-
-        }
+        makeApiCall();
+        réussir à vérifier que le code précédent est différent ou pas du nouveau code d'entrée
+        afficher la liste du produit précédent si pas de d'internet au moment du clique sur le bouton "recherche" du menu
+        }*/
+        makeApiCall();
 
     }
     private void makeApiCall(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constant.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(gson))
-                .build();
 
-        FoodApi foodApi = retrofit.create(FoodApi.class);
-
-        Call<ResFoodResponse> call = foodApi.getFoodResponse("0737628064502");
+        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse("5038862136532");
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {

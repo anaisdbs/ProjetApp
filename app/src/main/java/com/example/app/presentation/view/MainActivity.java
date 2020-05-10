@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.app.Singletons;
 import com.example.app.data.FoodApi;
 import com.example.app.R;
 import com.example.app.presentation.controller.MainController;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
 
-
     private MainController controller;
 
 
@@ -44,10 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         controller = new MainController(
                 this,
-                new GsonBuilder()
-                        .setLenient()
-                        .create(),
-                getSharedPreferences("application_anais", Context.MODE_PRIVATE)
+                Singletons.getGson(),
+                Singletons.getSharedPreferences(getApplicationContext())
         );
         controller.onStart();
     }
@@ -68,4 +66,5 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new ListAdapter(ingredientsList);
         recyclerView.setAdapter(mAdapter);
     }
+
 }
