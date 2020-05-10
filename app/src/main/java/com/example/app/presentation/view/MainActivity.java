@@ -1,4 +1,4 @@
-package com.example.app;
+package com.example.app.presentation.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,17 +7,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.app.data.FoodApi;
+import com.example.app.R;
+import com.example.app.presentation.model.Ingredients;
+import com.example.app.presentation.model.ResFoodResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Path;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
             }.getType();
             return gson.fromJson(jsonIngredient, listType);
         }
-
     }
 
     private void showError() {
@@ -98,13 +96,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
 
         // define an adapter
-
         mAdapter = new ListAdapter(ingredientsList);
         recyclerView.setAdapter(mAdapter);
     }
     private void makeApiCall(){
-
-
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
@@ -120,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
                     List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
                     saveList(ingredientsList);
                     showList(ingredientsList);
-
                 } else{
                     showError();
                 }

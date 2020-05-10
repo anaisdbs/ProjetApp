@@ -1,6 +1,6 @@
-package com.example.app;
+package com.example.app.data;
 
-import android.widget.EditText;
+import com.example.app.presentation.model.ResFoodResponse;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

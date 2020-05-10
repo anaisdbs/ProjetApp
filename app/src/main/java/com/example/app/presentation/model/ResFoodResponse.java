@@ -1,6 +1,4 @@
-package com.example.app;
-
-import java.util.List;
+package com.example.app.presentation.model;
 
 public class ResFoodResponse {
     private String code;
