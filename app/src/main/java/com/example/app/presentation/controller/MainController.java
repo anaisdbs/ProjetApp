@@ -88,5 +88,10 @@ public class MainController {
             }.getType();
             return gson.fromJson(jsonIngredient, listType);
         }
-    } 
+    }
+
+    public void onItemClick(Ingredients ingredients) {
+        view.navigateToDetails(ingredients);
+
+    }
 }

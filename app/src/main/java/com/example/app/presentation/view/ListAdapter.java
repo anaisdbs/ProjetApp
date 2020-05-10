@@ -14,6 +14,12 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private List<Ingredients> values;
+    private OnItemClickListener listener;
+
+
+    public interface OnItemClickListener {
+        void onItemClick(Ingredients item);
+    }
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one view per item, and
@@ -43,8 +49,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ListAdapter(List<Ingredients> myDataset) {
-        values = myDataset;
+    public ListAdapter(List<Ingredients> myDataset, OnItemClickListener listener) {
+        this.values = myDataset;
+        this.listener = listener;
     }
 
     // Create new views (invoked by the layout manager)
@@ -65,14 +72,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // - replace the contents of the view with that element
         final Ingredients currentIngredient = values.get(position);
         holder.txtHeader.setText(currentIngredient.getText());
-        holder.txtHeader.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                remove(position);
+        holder.txtFooter.setText(currentIngredient.getText());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override public void onClick(View v) {
+                listener.onItemClick(currentIngredient);
             }
         });
-
-        holder.txtFooter.setText(currentIngredient.getText());
     }
 
     // Return the size of your dataset (invoked by the layout manager)
