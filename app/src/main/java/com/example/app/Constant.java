@@ -5,4 +5,6 @@ public class Constant {
 
     public static String KEY_INGREDIENTS_LIST="jsonIngredientsList";
 
+    public static String KEY_INGREDIENTS ="ingredientsKey";
+
 }

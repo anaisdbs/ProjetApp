@@ -3,25 +3,25 @@ package com.example.app.presentation.model;
 public class Ingredients {
 
     private String text;
-    private Integer rank;
-/*    private Integer percent_max;
-    private Integer percent_min;*/
+    private Float rank;
+    private Float percent_max;
+    private Float percent_min;
 
 
     public String getText() {
         return text;
     }
 
-    public Integer getRank() {
+    public Float getRank() {
         return rank;
     }
 
-   /* public Integer getPercent_max() {
+    public Float getPercent_max() {
         return percent_max;
     }
 
-    public Integer getPercent_min() {
+    public Float getPercent_min() {
         return percent_min;
-    }*/
+    }
 }
 

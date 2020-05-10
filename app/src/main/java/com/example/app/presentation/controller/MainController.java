@@ -2,6 +2,7 @@ package com.example.app.presentation.controller;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.app.Constant;
@@ -29,12 +30,16 @@ public class MainController {
     private Gson gson;
     private MainActivity  view;
 
+    private EditText MonCode;
+
 
     public MainController(MainActivity mainActivity, Gson gson, SharedPreferences sharedPreferences) {
         this.view = mainActivity;
         this.gson = gson;
         this.sharedPreferences = sharedPreferences;
     }
+
+
 
     public void onStart(){
 
@@ -50,9 +55,10 @@ public class MainController {
         makeApiCall();
 
     }
+
     private void makeApiCall(){
 
-        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse("5038862136532");
+        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse("0737628064502");
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
@@ -75,7 +81,7 @@ public class MainController {
         String jsonString = gson.toJson(ingredientsList);
         sharedPreferences
                 .edit()
-                .putString("jsonIngredientsList", jsonString)
+                .putString(Constant.KEY_INGREDIENTS_LIST, jsonString)
                 .apply();
     }
 
