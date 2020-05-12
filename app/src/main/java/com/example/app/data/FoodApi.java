@@ -8,7 +8,7 @@ import retrofit2.http.Path;
 
 public interface FoodApi {
         @GET("api/v0/product/{code}.json")
-        Call<ResFoodResponse> getFoodResponse(@Path("code") String code);
+        Call<ResFoodResponse> getFoodResponse(@Path(value = "code") String code);
 
 
 }

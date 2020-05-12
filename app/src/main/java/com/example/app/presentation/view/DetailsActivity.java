@@ -27,10 +27,6 @@ public class DetailsActivity extends AppCompatActivity {
     private Integer PourcentageMaxInt;
     private Integer PourcentageMinInt;
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

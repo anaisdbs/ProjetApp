@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Product {
 
-    private String product_name;
+    private  String product_name;
     private List<Ingredients> ingredients;
 
 

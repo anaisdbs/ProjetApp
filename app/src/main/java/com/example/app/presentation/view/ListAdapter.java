@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.R;
 import com.example.app.presentation.model.Ingredients;
+import com.example.app.presentation.model.Product;
 
 import java.util.List;
 

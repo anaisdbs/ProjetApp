@@ -18,6 +18,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.view.DetailsActivity" />
+        <activity android:name=".presentation.view.IngredientsList" />
     </application>
 
 </manifest>
