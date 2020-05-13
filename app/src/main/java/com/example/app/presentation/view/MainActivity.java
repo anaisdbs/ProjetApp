@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
         );
         controller.onStart();
 
-
-
-
         recherche.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void navigateToIngredientsList(){
+    public void navigateToInfoProduit(){
         controller.recupererCode();
-        Intent myIntent2 = new Intent(MainActivity.this, IngredientsList.class);
-        myIntent2.putExtra(Constant.KEY_CODE_PRODUIT, coderentre_string);
-        MainActivity.this.startActivity(myIntent2);
+        Intent myIntent = new Intent(MainActivity.this, InfoProduit.class);
+        myIntent.putExtra(Constant.KEY_CODE_PRODUIT, coderentre_string);
+        MainActivity.this.startActivity(myIntent);
     }
 }

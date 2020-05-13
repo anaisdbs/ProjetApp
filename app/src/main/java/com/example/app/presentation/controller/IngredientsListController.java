@@ -22,86 +22,75 @@ import retrofit2.Response;
 
 public class IngredientsListController {
 
-    private SharedPreferences sharedPreferencesI;
-    private Gson gsonI;
-    private IngredientsList viewI;
+    private SharedPreferences sharedPreferences3;
+    private Gson gson3;
+    private IngredientsList view3;
+    public String nutriscore_grade;
 
-    private String ancien_code;
-    private String code2 = "3045320104127";
 
 
     public IngredientsListController(IngredientsList ingredientsList, Gson gson, SharedPreferences sharedPreferences) {
-        this.viewI = ingredientsList;
-        this.gsonI = gson;
-        this.sharedPreferencesI = sharedPreferences;
+        this.view3 = ingredientsList;
+        this.gson3 = gson;
+        this.sharedPreferences3 = sharedPreferences;
     }
 
 
     public void onStart(){
 
         List<Ingredients> ingredientsList = getDataFromCache();
-        ancien_code = sharedPreferencesI.getString(Constant.KEY_CODE, null);
 
-      if(ingredientsList != null && ancien_code.equals(viewI.code)) {
-              viewI.showList(ingredientsList);
+        if(ingredientsList != null && view3.ancien_code.equals(view3.code)) {
+              view3.showList(ingredientsList);
           } else {
               makeApiCall();
-          }
+        }
     }
 
     private void makeApiCall(){
 
-        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(viewI.code);
+        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(view3.code);
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
+
                     List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
-                    saveCode();
                     saveList(ingredientsList);
-                    viewI.showList(ingredientsList);
+                    view3.showList(ingredientsList);
                 } else{
-                    viewI.showError();
+                    view3.showError();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                viewI.showError();
+                view3.showError();
             }
         });
     }
 
     private void saveList(List<Ingredients> ingredientsList) {
-        String jsonString = gsonI.toJson(ingredientsList);
-        sharedPreferencesI
+        String jsonString = gson3.toJson(ingredientsList);
+        sharedPreferences3
                 .edit()
                 .putString(Constant.KEY_INGREDIENTS_LIST, jsonString)
                 .apply();
     }
 
-    private void saveCode(){
-        sharedPreferencesI
-                .edit()
-                .putString(Constant.KEY_CODE, viewI.code)
-                .apply();
-    }
-
-
-
     private List<Ingredients> getDataFromCache(){
 
-        String jsonIngredient = sharedPreferencesI.getString(Constant.KEY_INGREDIENTS_LIST, null);
+        String jsonIngredient = sharedPreferences3.getString(Constant.KEY_INGREDIENTS_LIST, null);
         if(jsonIngredient == null){
             return null;
         }else {
             Type listType = new TypeToken<List<Ingredients>>() {
             }.getType();
-            return gsonI.fromJson(jsonIngredient, listType);
+            return gson3.fromJson(jsonIngredient, listType);
         }
     }
 
     public void onItemClick(Ingredients ingredients) {
-        viewI.navigateToDetails(ingredients);
-
+        view3.navigateToDetails(ingredients);
     }
+
 }

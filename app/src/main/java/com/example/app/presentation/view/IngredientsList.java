@@ -27,6 +27,7 @@ public class IngredientsList extends AppCompatActivity {
 
     private IngredientsListController controllerI;
     public String code;
+    public String ancien_code;
 
 
     @Override
@@ -36,6 +37,7 @@ public class IngredientsList extends AppCompatActivity {
 
         Intent intent2 = getIntent();
         code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT); //if it's a string you stored.
+        ancien_code = intent2.getStringExtra("baba");
 
         Toast.makeText(this, code, Toast.LENGTH_SHORT ).show();
 
@@ -45,6 +47,7 @@ public class IngredientsList extends AppCompatActivity {
         );
         controllerI.onStart();
 
+
     }
 
     public void showError() {
@@ -52,6 +55,8 @@ public class IngredientsList extends AppCompatActivity {
     }
 
     public   void showList(List<Ingredients> ingredientsList){
+        Toast.makeText(this, controllerI.nutriscore_grade, Toast.LENGTH_SHORT ).show();
+
         recyclerView = findViewById(R.id.recycler_view);
         // use this setting to improve performance if you know that changes in content do not change the layout size of the RecyclerView
         recyclerView.setHasFixedSize(true);

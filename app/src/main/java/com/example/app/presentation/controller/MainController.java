@@ -9,7 +9,7 @@ import com.example.app.presentation.view.MainActivity;
 
 public class MainController {
 
-    private MainActivity  view;
+    private MainActivity view;
 
     public MainController(MainActivity mainActivity) {
         this.view = mainActivity;
@@ -17,16 +17,14 @@ public class MainController {
 
     public void onStart(){
         checkButton();
-
     }
 
     public void onButtonClick(Button recherche){
-        view.navigateToIngredientsList();
+        view.navigateToInfoProduit();
     }
 
     public void recupererCode(){
         view.coderentre_string = view.coderentre.getText().toString();
-
     }
 
     public void checkButton(){
@@ -44,10 +42,6 @@ public class MainController {
             @Override
             public void afterTextChanged(Editable s) {
             }
-
         });
-
-
     }
-
 }
