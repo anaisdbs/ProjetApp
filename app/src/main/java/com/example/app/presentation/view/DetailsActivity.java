@@ -2,21 +2,15 @@ package com.example.app.presentation.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.Constant;
 import com.example.app.R;
 import com.example.app.Singletons;
-import com.example.app.presentation.controller.MainController;
 import com.example.app.presentation.model.Ingredients;
 
-import java.util.List;
 
 public class DetailsActivity extends AppCompatActivity {
 

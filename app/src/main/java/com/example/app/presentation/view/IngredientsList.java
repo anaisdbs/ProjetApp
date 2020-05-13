@@ -35,7 +35,7 @@ public class IngredientsList extends AppCompatActivity {
         setContentView(R.layout.activity_affichage_list);
 
         Intent intent2 = getIntent();
-        code = intent2.getStringExtra("codeproduit"); //if it's a string you stored.
+        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT); //if it's a string you stored.
 
         Toast.makeText(this, code, Toast.LENGTH_SHORT ).show();
 

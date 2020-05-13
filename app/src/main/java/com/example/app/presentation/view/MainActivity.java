@@ -57,12 +57,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-
     public void navigateToIngredientsList(){
         controller.recupererCode();
         Intent myIntent2 = new Intent(MainActivity.this, IngredientsList.class);
-        myIntent2.putExtra("codeproduit", coderentre_string);
+        myIntent2.putExtra(Constant.KEY_CODE_PRODUIT, coderentre_string);
         MainActivity.this.startActivity(myIntent2);
     }
 }

@@ -7,5 +7,9 @@ public class Constant {
 
     public static String KEY_INGREDIENTS ="ingredientsKey";
 
+    public static String KEY_CODE = "ancien_code";
+
+    public static String KEY_CODE_PRODUIT = "codeproduit";
+
 
 }

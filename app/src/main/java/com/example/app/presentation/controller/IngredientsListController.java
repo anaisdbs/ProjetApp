@@ -2,6 +2,7 @@ package com.example.app.presentation.controller;
 
 import android.content.SharedPreferences;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.app.Constant;
 import com.example.app.Singletons;
@@ -25,9 +26,7 @@ public class IngredientsListController {
     private Gson gsonI;
     private IngredientsList viewI;
 
-
-    private EditText MonCode;
-  //  private String code3 = viewI.code;
+    private String ancien_code;
     private String code2 = "3045320104127";
 
 
@@ -38,20 +37,16 @@ public class IngredientsListController {
     }
 
 
-
     public void onStart(){
 
         List<Ingredients> ingredientsList = getDataFromCache();
+        ancien_code = sharedPreferencesI.getString(Constant.KEY_CODE, null);
 
-       /* if(ingredientsList != null){
-            view.showList(ingredientsList);
-        }else{
-        makeApiCall();
-        réussir à vérifier que le code précédent est différent ou pas du nouveau code d'entrée
-        afficher la liste du produit précédent si pas de d'internet au moment du clique sur le bouton "recherche" du menu
-        }*/
-        makeApiCall();
-
+      if(ingredientsList != null && ancien_code.equals(viewI.code)) {
+              viewI.showList(ingredientsList);
+          } else {
+              makeApiCall();
+          }
     }
 
     private void makeApiCall(){
@@ -62,6 +57,7 @@ public class IngredientsListController {
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
+                    saveCode();
                     saveList(ingredientsList);
                     viewI.showList(ingredientsList);
                 } else{
@@ -82,6 +78,15 @@ public class IngredientsListController {
                 .putString(Constant.KEY_INGREDIENTS_LIST, jsonString)
                 .apply();
     }
+
+    private void saveCode(){
+        sharedPreferencesI
+                .edit()
+                .putString(Constant.KEY_CODE, viewI.code)
+                .apply();
+    }
+
+
 
     private List<Ingredients> getDataFromCache(){
 
