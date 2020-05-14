@@ -13,6 +13,14 @@ public class Product {
 
     private List<Ingredients> ingredients;
 
+    public Product(String product_name, String image_url, String origins, String allergens, String nutriscore_grade) {
+        this.product_name = product_name;
+        this.image_url = image_url;
+        this.origins = origins;
+        this.allergens = allergens;
+        this.nutriscore_grade = nutriscore_grade;
+    }
+
     public String getImage_url() {
         return image_url;
     }

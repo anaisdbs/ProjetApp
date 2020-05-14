@@ -33,8 +33,7 @@ public class InfoProduitController {
     public String allergens;
     public String nutriscore_grade;
     public String image_url;
-
-
+    public Product product;
 
     public InfoProduitController(InfoProduit infoProduit, Gson gson, SharedPreferences sharedPreferences) {
         this.view2 = infoProduit;
@@ -45,9 +44,11 @@ public class InfoProduitController {
 
     public void onStart(){
 
+        product = getDataFromCacheProduit();
+
         ancien_code = sharedPreferences2.getString(Constant.KEY_CODE, null);
 
-      if(ancien_code.equals(view2.code)) {
+      if(product != null && ancien_code.equals(view2.code)) {
           view2.showProduit();
           view2.showImage();
           } else {
@@ -67,13 +68,14 @@ public class InfoProduitController {
                     allergens = response.body().getProduct().getAllergens();
                     nutriscore_grade =response.body().getProduct().getNutriscore_grade();
                     image_url = response.body().getProduct().getImage_url();
+
+                    createProduit();
+                    saveCode();
+                    saveProduit(product);
+
                     view2.showProduit();
                     view2.showImage();
 
-                    List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
-                    saveCode();
-                    saveProduit();
-                    saveList(ingredientsList);
                 } else{
                     view2.showError();
                 }
@@ -85,12 +87,8 @@ public class InfoProduitController {
         });
     }
 
-    private void saveList(List<Ingredients> ingredientsList) {
-        String jsonString = gson2.toJson(ingredientsList);
-        sharedPreferences2
-                .edit()
-                .putString(Constant.KEY_INGREDIENTS_LIST, jsonString)
-                .apply();
+    private void createProduit(){
+        product = new Product(name,image_url,origins,allergens,nutriscore_grade);
     }
 
     private void saveCode(){
@@ -100,24 +98,25 @@ public class InfoProduitController {
                 .apply();
     }
 
-    private void saveProduit(){
+    private void saveProduit(Product product){
+        String jsonString = gson2.toJson(product);
         sharedPreferences2
                 .edit()
-                .putString("nom", name)
-                .apply();
-        sharedPreferences2
-                .edit()
-                .putString("nom", origins)
-                .apply();
-        sharedPreferences2
-                .edit()
-                .putString("nom", allergens)
-                .apply();
-        sharedPreferences2
-                .edit()
-                .putString("nom", nutriscore_grade)
+                .putString(Constant.KEY_SAVE_PRODUIT, jsonString)
                 .apply();
     }
+
+    private Product getDataFromCacheProduit(){
+        String jsonProduit  = sharedPreferences2.getString(Constant.KEY_SAVE_PRODUIT, null);
+        if (jsonProduit == null){
+            return null;
+        }else {
+            Product productsave = gson2.fromJson(jsonProduit, Product.class);
+            return productsave;
+        }
+    }
+
+
 
     public void onButtonClick(Button button){
         view2.navigateToIngredientsList();

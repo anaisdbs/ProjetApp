@@ -40,8 +40,6 @@ public class InfoProduit extends AppCompatActivity {
     public ImageView image_produit;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,27 +74,26 @@ public class InfoProduit extends AppCompatActivity {
         Toast.makeText(this,"Api Erreur", Toast.LENGTH_SHORT ).show();
     }
 
+    public void showImage(){
+        Picasso.get()
+                .load(controller2.product.getImage_url())
+                // .resizeDimen(R.dimen.image_size,R.dimen.image_size)
+                .fit()
+                .centerInside()
+                .into(image_produit);
+    }
+
+    public void showProduit() {
+        txtname.setText(String.valueOf(controller2.product.getProduct_name()));
+        txtorigins.setText(String.valueOf(controller2.product.getOrigins()));
+        txtallergens.setText(String.valueOf(controller2.product.getAllergens()));
+        txtnutriscore.setText(String.valueOf(controller2.product.getNutriscore_grade()));
+    }
+
     public void navigateToIngredientsList() {
         Intent myIntent = new Intent(InfoProduit.this, IngredientsList.class);
         myIntent.putExtra(Constant.KEY_CODE_PRODUIT, code);
         myIntent.putExtra("baba",controller2.ancien_code);
         InfoProduit.this.startActivity(myIntent);
-    }
-
-    public void showImage(){
-        Picasso.get()
-                .load(controller2.image_url)
-                // .resizeDimen(R.dimen.image_size,R.dimen.image_size)
-                .fit()
-                .centerInside()
-                .into(image_produit);
-
-    }
-
-    public void showProduit() {
-        txtname.setText(String.valueOf(controller2.name));
-        txtorigins.setText(String.valueOf(controller2.origins));
-        txtallergens.setText(String.valueOf(controller2.allergens));
-        txtnutriscore.setText(String.valueOf(controller2.nutriscore_grade));
     }
 }

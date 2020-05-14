@@ -54,8 +54,7 @@ public class IngredientsList extends AppCompatActivity {
         Toast.makeText(this,"Api Erreur", Toast.LENGTH_SHORT ).show();
     }
 
-    public   void showList(List<Ingredients> ingredientsList){
-        Toast.makeText(this, controllerI.nutriscore_grade, Toast.LENGTH_SHORT ).show();
+    public void showList(List<Ingredients> ingredientsList){
 
         recyclerView = findViewById(R.id.recycler_view);
         // use this setting to improve performance if you know that changes in content do not change the layout size of the RecyclerView
@@ -78,6 +77,5 @@ public class IngredientsList extends AppCompatActivity {
         Intent myIntent = new Intent(IngredientsList.this, DetailsActivity.class);
         myIntent.putExtra(Constant.KEY_INGREDIENTS, Singletons.getGson().toJson(ingredients));
         IngredientsList.this.startActivity(myIntent);
-
     }
 }

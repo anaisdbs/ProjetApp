@@ -11,5 +11,7 @@ public class Constant {
 
     public static String KEY_CODE_PRODUIT = "codeproduit";
 
+    public static String KEY_SAVE_PRODUIT = "saveproduit";
+
 
 }
