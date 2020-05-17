@@ -20,6 +20,7 @@
         <activity android:name=".presentation.view.DetailsActivity" />
         <activity android:name=".presentation.view.IngredientsList" />
         <activity android:name=".presentation.view.InfoProduit" />
+        <activity android:name=".presentation.view.ErreurActivity" />
     </application>
 
 </manifest>

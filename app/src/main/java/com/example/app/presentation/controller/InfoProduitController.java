@@ -34,6 +34,7 @@ public class InfoProduitController {
     public String nutriscore_grade;
     public String image_url;
     public Product product;
+    public String jsonProduit;
 
     public InfoProduitController(InfoProduit infoProduit, Gson gson, SharedPreferences sharedPreferences) {
         this.view2 = infoProduit;
@@ -62,7 +63,8 @@ public class InfoProduitController {
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful() && response.body().getProduct() != null) {
+
                     name = response.body().getProduct().getProduct_name();
                     origins = response.body().getProduct().getOrigins();
                     allergens = response.body().getProduct().getAllergens();
@@ -77,7 +79,9 @@ public class InfoProduitController {
                     view2.showImage();
 
                 } else{
+                    jsonProduit = null;
                     view2.showError();
+                    view2.navigateToErreur();
                 }
             }
             @Override
@@ -107,7 +111,7 @@ public class InfoProduitController {
     }
 
     private Product getDataFromCacheProduit(){
-        String jsonProduit  = sharedPreferences2.getString(Constant.KEY_SAVE_PRODUIT, null);
+        jsonProduit  = sharedPreferences2.getString(Constant.KEY_SAVE_PRODUIT, null);
         if (jsonProduit == null){
             return null;
         }else {
@@ -115,7 +119,6 @@ public class InfoProduitController {
             return productsave;
         }
     }
-
 
 
     public void onButtonClick(Button button){

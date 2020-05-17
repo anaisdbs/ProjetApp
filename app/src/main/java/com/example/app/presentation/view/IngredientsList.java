@@ -78,4 +78,9 @@ public class IngredientsList extends AppCompatActivity {
         myIntent.putExtra(Constant.KEY_INGREDIENTS, Singletons.getGson().toJson(ingredients));
         IngredientsList.this.startActivity(myIntent);
     }
+
+    public void navigateToErreur() {
+        Intent myIntent = new Intent(IngredientsList.this, ErreurActivity.class);
+        IngredientsList.this.startActivity(myIntent);
+    }
 }

@@ -25,10 +25,6 @@ import java.util.List;
 
 public class InfoProduit extends AppCompatActivity {
 
-    private RecyclerView recyclerView;
-    private ListAdapter mAdapter;
-    private RecyclerView.LayoutManager layoutManager;
-
     private InfoProduitController controller2;
     public String code;
 
@@ -84,10 +80,44 @@ public class InfoProduit extends AppCompatActivity {
     }
 
     public void showProduit() {
-        txtname.setText(String.valueOf(controller2.product.getProduct_name()));
-        txtorigins.setText(String.valueOf(controller2.product.getOrigins()));
-        txtallergens.setText(String.valueOf(controller2.product.getAllergens()));
-        txtnutriscore.setText(String.valueOf(controller2.product.getNutriscore_grade()));
+        if (controller2.product.getProduct_name() == null) {
+            txtname.setText("le nom du produit est inconnu");
+        } else {
+            if (controller2.product.getProduct_name().equals("")) {
+                txtname.setText("le nom du produit est inconnu");
+            } else {
+                txtname.setText(controller2.product.getProduct_name());
+            }
+        }
+
+        if(controller2.product.getOrigins() == null ){
+            txtorigins.setText("l'origine du produit est inconnue");
+        }else {
+            if (controller2.product.getOrigins().equals("") ) {
+                txtorigins.setText("l'origine du produit est inconnue");
+            } else {
+                txtorigins.setText(controller2.product.getOrigins());
+            }
+        }
+
+        if (controller2.product.getAllergens() ==  null){
+            txtallergens.setText("Aucun allergène connu pour ce produit");
+        }else {
+            if (controller2.product.getAllergens().equals("")) {
+                txtallergens.setText("Aucun allergène connu pour ce produit");
+            } else {
+                txtallergens.setText(controller2.product.getAllergens());
+            }
+        }
+        if (controller2.product.getNutriscore_grade() == null){
+            txtnutriscore.setText("le nutriscore est inconnu");
+        }else{
+            if (controller2.product.getNutriscore_grade().equals("")){
+                txtnutriscore.setText("le nutriscore est inconnu");
+            }else{
+                txtnutriscore.setText(controller2.product.getNutriscore_grade());
+            }
+        }
     }
 
     public void navigateToIngredientsList() {
@@ -96,4 +126,9 @@ public class InfoProduit extends AppCompatActivity {
         myIntent.putExtra("baba",controller2.ancien_code);
         InfoProduit.this.startActivity(myIntent);
     }
+    public void navigateToErreur() {
+        Intent myIntent = new Intent(InfoProduit.this, ErreurActivity.class);
+        InfoProduit.this.startActivity(myIntent);
+    }
+
 }

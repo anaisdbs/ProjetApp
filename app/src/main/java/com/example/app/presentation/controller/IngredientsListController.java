@@ -26,6 +26,7 @@ public class IngredientsListController {
     private Gson gson3;
     private IngredientsList view3;
     public String nutriscore_grade;
+    public String jsonIngredient;
 
 
 
@@ -53,13 +54,25 @@ public class IngredientsListController {
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful() && response.body().getProduct()!=null) {
+                    if(response.body().getProduct().getIngredients()==null){
+                        List<Ingredients> ingredientsList = null;
+                        saveList(ingredientsList);
+                        getDataFromCache();
+                        view3.navigateToErreur();
 
-                    List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
-                    saveList(ingredientsList);
-                    view3.showList(ingredientsList);
+
+
+                    }
+                    else {
+                        List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
+                        saveList(ingredientsList);
+                        view3.showList(ingredientsList);
+                    }
+
                 } else{
                     view3.showError();
+                    view3.navigateToErreur();
                 }
             }
             @Override
@@ -78,8 +91,7 @@ public class IngredientsListController {
     }
 
     private List<Ingredients> getDataFromCache(){
-
-        String jsonIngredient = sharedPreferences3.getString(Constant.KEY_INGREDIENTS_LIST, null);
+        jsonIngredient = sharedPreferences3.getString(Constant.KEY_INGREDIENTS_LIST, null);
         if(jsonIngredient == null){
             return null;
         }else {

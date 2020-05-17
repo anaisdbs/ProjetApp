@@ -5,7 +5,6 @@ import java.util.List;
 public class Product {
 
     private String product_name;
-
     private String image_url;
     private String origins;
     private String allergens;
