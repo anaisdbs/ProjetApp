@@ -39,7 +39,7 @@ public class IngredientsList extends AppCompatActivity {
         code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT); //if it's a string you stored.
         ancien_code = intent2.getStringExtra("baba");
 
-        Toast.makeText(this, code, Toast.LENGTH_SHORT ).show();
+       // Toast.makeText(this, code, Toast.LENGTH_SHORT ).show();
 
         controllerI = new IngredientsListController(this,
                 Singletons.getGson(),

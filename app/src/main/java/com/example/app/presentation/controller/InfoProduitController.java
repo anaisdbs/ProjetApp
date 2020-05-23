@@ -74,19 +74,24 @@ public class InfoProduitController {
                     createProduit();
                     saveCode();
                     saveProduit(product);
+                    List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
+                    saveList(ingredientsList);
+
 
                     view2.showProduit();
                     view2.showImage();
 
                 } else{
                     jsonProduit = null;
-                    view2.showError();
+                    //view2.showError();
                     view2.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                view2.showError();
+                //view2.showError();
+                view2.navigateToErreur();
+
             }
         });
     }
@@ -107,6 +112,14 @@ public class InfoProduitController {
         sharedPreferences2
                 .edit()
                 .putString(Constant.KEY_SAVE_PRODUIT, jsonString)
+                .apply();
+    }
+
+    private void saveList(List<Ingredients> ingredientsList) {
+        String jsonString = gson2.toJson(ingredientsList);
+        sharedPreferences2
+                .edit()
+                .putString(Constant.KEY_INGREDIENTS_LIST, jsonString)
                 .apply();
     }
 

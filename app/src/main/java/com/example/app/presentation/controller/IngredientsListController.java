@@ -60,9 +60,6 @@ public class IngredientsListController {
                         saveList(ingredientsList);
                         getDataFromCache();
                         view3.navigateToErreur();
-
-
-
                     }
                     else {
                         List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
@@ -71,13 +68,14 @@ public class IngredientsListController {
                     }
 
                 } else{
-                    view3.showError();
+                    //view3.showError();
                     view3.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                view3.showError();
+                //view3.showError();
+                view3.navigateToErreur();
             }
         });
     }

@@ -81,39 +81,39 @@ public class InfoProduit extends AppCompatActivity {
 
     public void showProduit() {
         if (controller2.product.getProduct_name() == null) {
-            txtname.setText("le nom du produit est inconnu");
+            txtname.setText("inconnu");
         } else {
             if (controller2.product.getProduct_name().equals("")) {
-                txtname.setText("le nom du produit est inconnu");
+                txtname.setText("inconnu");
             } else {
                 txtname.setText(controller2.product.getProduct_name());
             }
         }
 
         if(controller2.product.getOrigins() == null ){
-            txtorigins.setText("l'origine du produit est inconnue");
+            txtorigins.setText("inconnue");
         }else {
             if (controller2.product.getOrigins().equals("") ) {
-                txtorigins.setText("l'origine du produit est inconnue");
+                txtorigins.setText("inconnue");
             } else {
                 txtorigins.setText(controller2.product.getOrigins());
             }
         }
 
         if (controller2.product.getAllergens() ==  null){
-            txtallergens.setText("Aucun allergène connu pour ce produit");
+            txtallergens.setText("aucun allergène connu");
         }else {
             if (controller2.product.getAllergens().equals("")) {
-                txtallergens.setText("Aucun allergène connu pour ce produit");
+                txtallergens.setText("aucun allergène connu");
             } else {
                 txtallergens.setText(controller2.product.getAllergens());
             }
         }
         if (controller2.product.getNutriscore_grade() == null){
-            txtnutriscore.setText("le nutriscore est inconnu");
+            txtnutriscore.setText("inconnu");
         }else{
             if (controller2.product.getNutriscore_grade().equals("")){
-                txtnutriscore.setText("le nutriscore est inconnu");
+                txtnutriscore.setText("inconnu");
             }else{
                 txtnutriscore.setText(controller2.product.getNutriscore_grade());
             }
