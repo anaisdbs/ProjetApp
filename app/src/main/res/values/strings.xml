@@ -18,4 +18,5 @@
     <string name="InfoInconnu">inconnu</string>
     <string name="InfoInconnue">inconnue</string>
     <string name="InfoAllergen">aucun allergène connu</string>
+    <string name="Search_ing">Rechercher un ingrédient</string>
 </resources>
