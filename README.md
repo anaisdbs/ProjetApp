@@ -13,7 +13,7 @@ Cette application affiche des informations concernant n'importe quel produit ali
 https://world.openfoodfacts.org/api/v0/product/{code}.json
 ```
 
-## Consignes respectées:
+## Consignes respectées
 
 * Écran avec une liste d'éléments
 * Écran avec le détail d'un élément
