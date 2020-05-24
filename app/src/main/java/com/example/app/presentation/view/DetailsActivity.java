@@ -16,6 +16,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private TextView txtDetail1;
     private TextView txtDetail2;
+    private TextView noming;
     private Float PourcentageMax;
     private Float PourcentageMin;
     private Integer PourcentageMaxInt;
@@ -28,12 +29,19 @@ public class DetailsActivity extends AppCompatActivity {
 
         txtDetail1 = findViewById(R.id.details_txt);
         txtDetail2 = findViewById(R.id.details_txt2);
+        noming = findViewById(R.id.nom_ing);
 
         Intent intent = getIntent();
-        String ingredientJson = intent.getStringExtra(Constant.KEY_INGREDIENTS); //if it's a string you stored.
+        String ingredientJson = intent.getStringExtra(Constant.KEY_INGREDIENTS);
         Ingredients ingredients = Singletons.getGson().fromJson(ingredientJson, Ingredients.class);
-        
+
+
+        showName(ingredients);
         showDetails(ingredients);
+    }
+
+    private void showName(Ingredients ingredients){
+        noming.setText(ingredients.getText());
     }
 
     private void showDetails(Ingredients ingredients) {
