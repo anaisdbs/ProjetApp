@@ -29,16 +29,18 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 
 ### Premier écran
 
-* Menu affichant le logo et un espace pour rentré le code barre du produit
+* Menu affichant le logo et un espace pour rentrer le code barre du produit
 
 <img src= "images/Menu.png" width="300"> <img src= "images/Menu_code_keyboard.png" width="300">
 
 
 ### Deuxième écran
 
-* Si le code barre rentré est inexistant, l'utilisateur est redirigé vers cet écran
-* Affichage d'un message d'erreur et d'un bouton cliquable permettant de revenir au menu
+* Si le code barre rentré est inexistant ou que l'appel à l'api ne fonctionne pas, l'utilisateur est redirigé vers cet écran
+* Affichage d'un message d'erreur différent si l'erreur vient d'un code barre inexistant ou d'une erreur api 
+* Affichage d'un bouton cliquable permettant de revenir au menu
 
+<img src= "images/Erreur.png" width="300"> <img src= "images/Erreur_api.png" width="300"> 
 
 ### Troisième écran
 
