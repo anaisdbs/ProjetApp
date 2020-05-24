@@ -25,8 +25,8 @@ public class IngredientsListController {
     private SharedPreferences sharedPreferences3;
     private Gson gson3;
     private IngredientsList view3;
-    public String nutriscore_grade;
     public String jsonIngredient;
+
 
 
 

@@ -1,9 +1,19 @@
 package com.example.app.presentation.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.inputmethod.InputMethod;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,13 +27,17 @@ import com.example.app.presentation.controller.IngredientsListController;
 import com.example.app.presentation.controller.MainController;
 import com.example.app.presentation.model.Ingredients;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class IngredientsList extends AppCompatActivity {
+public class IngredientsList extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
+
+    public SearchView editsearch; //
+
 
     private IngredientsListController controllerI;
     public String code;
@@ -34,6 +48,7 @@ public class IngredientsList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_list);
+
 
         Intent intent2 = getIntent();
         code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT); //if it's a string you stored.
@@ -47,8 +62,15 @@ public class IngredientsList extends AppCompatActivity {
         );
         controllerI.onStart();
 
+        createSearch();
 
     }
+
+    private void createSearch(){
+        editsearch = (SearchView) findViewById(R.id.search); //
+        editsearch.setOnQueryTextListener(this); //
+    }
+
 
     public void showError() {
         Toast.makeText(this,"Api Erreur", Toast.LENGTH_SHORT ).show();
@@ -71,6 +93,7 @@ public class IngredientsList extends AppCompatActivity {
             }
         });
         recyclerView.setAdapter(mAdapter);
+
     }
 
     public void navigateToDetails(Ingredients ingredients) {
@@ -83,4 +106,18 @@ public class IngredientsList extends AppCompatActivity {
         Intent myIntent = new Intent(IngredientsList.this, ErreurActivity.class);
         IngredientsList.this.startActivity(myIntent);
     }
+
+
+    @Override
+    public boolean onQueryTextSubmit(String query) { //
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) { //
+        mAdapter.getFilter().filter(newText);
+        return false;
+    }
+
+
 }

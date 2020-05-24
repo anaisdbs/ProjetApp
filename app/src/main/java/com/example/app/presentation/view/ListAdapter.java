@@ -3,18 +3,21 @@ package com.example.app.presentation.view;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.R;
 import com.example.app.presentation.model.Ingredients;
-import com.example.app.presentation.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
-    private List<Ingredients> values;
+public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> implements Filterable  {
+    private List<Ingredients> listing;
+    private List<Ingredients> listFull; //
     private OnItemClickListener listener;
 
 
@@ -40,19 +43,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
     public void add(int position, Ingredients item) {
-        values.add(position, item);
+        listing.add(position, item);
         notifyItemInserted(position);
     }
 
     public void remove(int position) {
-        values.remove(position);
+        listing.remove(position);
         notifyItemRemoved(position);
     }
 
     // Provide a suitable constructor (depends on the kind of dataset)
     public ListAdapter(List<Ingredients> myDataset, OnItemClickListener listener) {
-        this.values = myDataset;
+        this.listing = myDataset;
         this.listener = listener;
+        listFull = new ArrayList<>(myDataset); //
     }
 
     // Create new views (invoked by the layout manager)
@@ -71,7 +75,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        final Ingredients currentIngredient = values.get(position);
+        final Ingredients currentIngredient = listing.get(position);
         holder.txtHeader.setText(currentIngredient.getText());
     //    holder.txtFooter.setText(currentIngredient.getText());
 
@@ -85,7 +89,45 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return values.size();
+        return listing.size();
     }
+
+
+    @Override
+    public Filter getFilter() { //
+        return ingredientFilter;
+    }
+
+    private Filter ingredientFilter = new Filter() { //
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<Ingredients> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0){
+                filteredList.addAll(listFull);
+            }else{
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (Ingredients item : listFull){
+                    if (item.getText().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return  results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            listing.clear();
+            listing.addAll((List)results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
 
 }
