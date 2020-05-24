@@ -17,5 +17,7 @@ public class Constant {
 
     public static String ERROR = "API erreur";
 
+    public static String ERROR_NAME = "erreur name";
+
 
 }

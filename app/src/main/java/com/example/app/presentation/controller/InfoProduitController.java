@@ -34,6 +34,7 @@ public class InfoProduitController {
     private String image_url;
     public Product product;
     private String jsonProduit;
+    public String erreur;
 
     public InfoProduitController(InfoProduit infoProduit, Gson gson, SharedPreferences sharedPreferences) {
         this.view2 = infoProduit;
@@ -82,12 +83,15 @@ public class InfoProduitController {
 
                 } else{
                     jsonProduit = null;
+                    erreur = "erreur produit";
                     view2.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
+                erreur = "erreur api";
                 view2.navigateToErreur();
+
             }
         });
     }

@@ -8,7 +8,7 @@
     <string name="Pmin">Pourcentage min pouvant être présent</string>
     <string name="AlertCode">Le code barre rentré est inexistant</string>
     <string name="retour_menu">RETOUR MENU</string>
-    <string name="Voir_ing">Voir les ingrédients</string>
+    <string name="Voir_ing">Voir les ingredients</string>
     <string name="nom_produit">NOM PRODUIT</string>
     <string name="origine">ORIGINE PRODUIT</string>
     <string name="nutriscore">NUTRISCORE</string>
@@ -19,4 +19,5 @@
     <string name="InfoInconnue">inconnue</string>
     <string name="InfoAllergen">aucun allergène connu</string>
     <string name="Search_ing">Rechercher un ingrédient</string>
+    <string name="AlertApi">Une erreur s\'est produite</string>
 </resources>

@@ -23,6 +23,8 @@ public class IngredientsListController {
     private Gson gson3;
     private IngredientsList view3;
     private String jsonIngredient;
+    public String erreur;
+
 
 
     public IngredientsListController(IngredientsList ingredientsList, Gson gson, SharedPreferences sharedPreferences) {
@@ -54,11 +56,13 @@ public class IngredientsListController {
                         List<Ingredients> ingredientsList = null;
                         saveList(ingredientsList);
                         getDataFromCache();
+                        erreur = "erreur produit";
                         view3.navigateToErreur();
                     }
                     else {
                         List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
                         saveList(ingredientsList);
+                        erreur = "erreur produit";
                         view3.showList(ingredientsList);
                     }
 
@@ -68,6 +72,7 @@ public class IngredientsListController {
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
+                erreur = "erreur api";
                 view3.navigateToErreur();
             }
         });

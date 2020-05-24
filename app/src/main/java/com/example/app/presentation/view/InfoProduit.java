@@ -127,6 +127,7 @@ public class InfoProduit extends AppCompatActivity {
     }
     public void navigateToErreur() {
         Intent myIntent = new Intent(InfoProduit.this, ErreurActivity.class);
+        myIntent.putExtra(Constant.ERROR_NAME, controller2.erreur);
         InfoProduit.this.startActivity(myIntent);
     }
 

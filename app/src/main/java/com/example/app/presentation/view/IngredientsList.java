@@ -33,6 +33,7 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
     public String ancien_code;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +88,7 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
 
     public void navigateToErreur() {
         Intent myIntent = new Intent(IngredientsList.this, ErreurActivity.class);
+        myIntent.putExtra(Constant.ERROR_NAME, controllerI.erreur);
         IngredientsList.this.startActivity(myIntent);
     }
 

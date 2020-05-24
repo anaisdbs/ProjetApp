@@ -65,6 +65,7 @@
         android:layout_width="205dp"
         android:layout_height="48dp"
         android:background="@drawable/rounded_button"
+        android:fontFamily="sans-serif"
         android:text="@string/Voir_ing"
         android:textColor="@android:color/white"
         android:textStyle="bold"
