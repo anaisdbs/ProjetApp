@@ -17,7 +17,7 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 
 * Écran avec une liste d'éléments
 * Écran avec le détail d'un élément
-* Écrans 5 activités 
+* Écrans: 5 activités 
 * Appel WebService à une API Rest
 * Stockage des données en caches
 * Singletons
