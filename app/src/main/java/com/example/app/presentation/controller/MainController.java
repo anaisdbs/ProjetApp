@@ -36,7 +36,6 @@ public class MainController {
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // This is where we'll check the user input
                 view.recherche.setEnabled(s.toString().length() == 13);
             }
             @Override

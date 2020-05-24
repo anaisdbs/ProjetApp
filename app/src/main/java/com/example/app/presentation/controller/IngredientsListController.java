@@ -1,15 +1,12 @@
 package com.example.app.presentation.controller;
 
 import android.content.SharedPreferences;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.app.Constant;
 import com.example.app.Singletons;
 import com.example.app.presentation.model.Ingredients;
 import com.example.app.presentation.model.ResFoodResponse;
 import com.example.app.presentation.view.IngredientsList;
-import com.example.app.presentation.view.MainActivity;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -25,9 +22,7 @@ public class IngredientsListController {
     private SharedPreferences sharedPreferences3;
     private Gson gson3;
     private IngredientsList view3;
-    public String jsonIngredient;
-
-
+    private String jsonIngredient;
 
 
     public IngredientsListController(IngredientsList ingredientsList, Gson gson, SharedPreferences sharedPreferences) {
@@ -68,13 +63,11 @@ public class IngredientsListController {
                     }
 
                 } else{
-                    //view3.showError();
                     view3.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                //view3.showError();
                 view3.navigateToErreur();
             }
         });

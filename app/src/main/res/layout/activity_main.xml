@@ -15,7 +15,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
-        android:hint="Code barre"
+        android:hint="@string/code_barre"
         android:inputType="number"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toBottomOf="parent"

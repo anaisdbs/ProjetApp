@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app.Constant;
 import com.example.app.R;
-import com.example.app.Singletons;
 import com.example.app.presentation.controller.ErreurController;
-import com.example.app.presentation.controller.MainController;
-import com.example.app.presentation.model.Ingredients;
+
 
 
 public class ErreurActivity extends AppCompatActivity {

@@ -13,5 +13,9 @@ public class Constant {
 
     public static String KEY_SAVE_PRODUIT = "saveproduit";
 
+    public static String KEY_CODE2 = "ancien_code2";
+
+    public static String ERROR = "API erreur";
+
 
 }

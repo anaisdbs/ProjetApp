@@ -3,4 +3,19 @@
     <string name="button_rechercher">RECHERCHER</string>
     <string name="poucentagemin">PoucentageMin</string>
     <string name="poucentagemax">PoucentageMax</string>
+    <string name="liste_des_ingredients">LISTE DES INGREDIENTS</string>
+    <string name="Pmax">Pourcentage max pouvant être présent</string>
+    <string name="Pmin">Pourcentage min pouvant être présent</string>
+    <string name="AlertCode">Le code barre rentré est inexistant</string>
+    <string name="retour_menu">RETOUR MENU</string>
+    <string name="Voir_ing">Voir les ingrédients</string>
+    <string name="nom_produit">NOM PRODUIT</string>
+    <string name="origine">ORIGINE PRODUIT</string>
+    <string name="nutriscore">NUTRISCORE</string>
+    <string name="allergens">ALLERGENE</string>
+    <string name="code_barre">Code barre</string>
+    <string name="nom_ingredient">nom ingredient</string>
+    <string name="InfoInconnu">inconnu</string>
+    <string name="InfoInconnue">inconnue</string>
+    <string name="InfoAllergen">aucun allergène connu</string>
 </resources>

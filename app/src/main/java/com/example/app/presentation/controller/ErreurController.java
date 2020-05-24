@@ -1,12 +1,9 @@
 
 package com.example.app.presentation.controller;
 
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.widget.Button;
 
 import com.example.app.presentation.view.ErreurActivity;
-import com.example.app.presentation.view.MainActivity;
 
 public class ErreurController {
 

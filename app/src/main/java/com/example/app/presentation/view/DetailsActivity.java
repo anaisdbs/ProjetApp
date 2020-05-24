@@ -42,18 +42,15 @@ public class DetailsActivity extends AppCompatActivity {
             PourcentageMin = ingredients.getPercent_min();
 
         if (PourcentageMax != null) {
-
             PourcentageMaxInt = Math.round(ingredients.getPercent_max());
             txtDetail1.setText((PourcentageMaxInt)+ "%");
-
         } else {
             txtDetail1.setText("Le pourcentage max de l'ingrédient\n" +ingredients.getText()+ "\nest inconnu");
         }
-        if (PourcentageMin != null) {
 
+        if (PourcentageMin != null) {
             PourcentageMinInt = Math.round(ingredients.getPercent_min());
             txtDetail2.setText((PourcentageMinInt)+"%");
-
         } else {
             txtDetail2.setText("Le pourcentage min de l'ingrédient\n" +ingredients.getText()+ "\nest inconnu");
         }

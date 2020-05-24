@@ -27,14 +27,13 @@ public class InfoProduitController {
     private InfoProduit view2;
 
     public String ancien_code;
-    private String code2 = "3045320104127";
     public String name;
-    public String origins;
-    public String allergens;
-    public String nutriscore_grade;
-    public String image_url;
+    private String origins;
+    private String allergens;
+    private String nutriscore_grade;
+    private String image_url;
     public Product product;
-    public String jsonProduit;
+    private String jsonProduit;
 
     public InfoProduitController(InfoProduit infoProduit, Gson gson, SharedPreferences sharedPreferences) {
         this.view2 = infoProduit;
@@ -83,15 +82,12 @@ public class InfoProduitController {
 
                 } else{
                     jsonProduit = null;
-                    //view2.showError();
                     view2.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                //view2.showError();
                 view2.navigateToErreur();
-
             }
         });
     }

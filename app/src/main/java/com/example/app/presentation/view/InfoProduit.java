@@ -9,19 +9,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app.Constant;
 import com.example.app.R;
 import com.example.app.Singletons;
 import com.example.app.presentation.controller.InfoProduitController;
-import com.example.app.presentation.controller.IngredientsListController;
-import com.example.app.presentation.model.Ingredients;
-import com.example.app.presentation.model.Product;
+
 import com.squareup.picasso.Picasso;
 
-import java.util.List;
 
 public class InfoProduit extends AppCompatActivity {
 
@@ -67,53 +62,57 @@ public class InfoProduit extends AppCompatActivity {
     }
 
     public void showError() {
-        Toast.makeText(this,"Api Erreur", Toast.LENGTH_SHORT ).show();
+        Toast.makeText(this,Constant.ERROR, Toast.LENGTH_SHORT ).show();
     }
 
     public void showImage(){
-        Picasso.get()
-                .load(controller2.product.getImage_url())
-                // .resizeDimen(R.dimen.image_size,R.dimen.image_size)
-                .fit()
-                .centerInside()
-                .into(image_produit);
+
+        if(controller2.product.getImage_url() == null){
+            image_produit.setImageResource(R.drawable.ic_image);
+        }else {
+            Picasso.get()
+                    .load(controller2.product.getImage_url())
+                    .fit()
+                    .centerInside()
+                    .into(image_produit);
+        }
     }
 
     public void showProduit() {
         if (controller2.product.getProduct_name() == null) {
-            txtname.setText("inconnu");
+            txtname.setText(R.string.InfoInconnu);
         } else {
             if (controller2.product.getProduct_name().equals("")) {
-                txtname.setText("inconnu");
+                txtname.setText(R.string.InfoInconnu);
             } else {
                 txtname.setText(controller2.product.getProduct_name());
             }
         }
 
         if(controller2.product.getOrigins() == null ){
-            txtorigins.setText("inconnue");
+            txtorigins.setText(R.string.InfoInconnue);
         }else {
             if (controller2.product.getOrigins().equals("") ) {
-                txtorigins.setText("inconnue");
+                txtorigins.setText(R.string.InfoInconnue);
             } else {
                 txtorigins.setText(controller2.product.getOrigins());
             }
         }
 
         if (controller2.product.getAllergens() ==  null){
-            txtallergens.setText("aucun allergène connu");
+            txtallergens.setText(R.string.InfoAllergen);
         }else {
             if (controller2.product.getAllergens().equals("")) {
-                txtallergens.setText("aucun allergène connu");
+                txtallergens.setText(R.string.InfoAllergen);
             } else {
-                txtallergens.setText(controller2.product.getAllergens());
+                txtallergens.setText(controller2.product.getAllergens().replaceAll("en:", " "));
             }
         }
         if (controller2.product.getNutriscore_grade() == null){
-            txtnutriscore.setText("inconnu");
+            txtnutriscore.setText(R.string.InfoInconnu);
         }else{
             if (controller2.product.getNutriscore_grade().equals("")){
-                txtnutriscore.setText("inconnu");
+                txtnutriscore.setText(R.string.InfoInconnu);
             }else{
                 txtnutriscore.setText(controller2.product.getNutriscore_grade());
             }
@@ -123,7 +122,7 @@ public class InfoProduit extends AppCompatActivity {
     public void navigateToIngredientsList() {
         Intent myIntent = new Intent(InfoProduit.this, IngredientsList.class);
         myIntent.putExtra(Constant.KEY_CODE_PRODUIT, code);
-        myIntent.putExtra("baba",controller2.ancien_code);
+        myIntent.putExtra(Constant.KEY_CODE2,controller2.ancien_code);
         InfoProduit.this.startActivity(myIntent);
     }
     public void navigateToErreur() {
