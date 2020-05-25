@@ -36,8 +36,8 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 
 ### Deuxième écran
 
-* Si le code barre rentré est inexistant ou que l'appel à l'api ne fonctionne pas, l'utilisateur est redirigé vers cet écran
-* Affichage d'un message d'erreur différent si l'erreur vient d'un code barre inexistant ou d'une erreur api 
+* Si le code barre rentré est inexistant ou que l'appel à l'API ne fonctionne pas, l'utilisateur est redirigé vers cet écran
+* Affichage d'un message d'erreur différent si l'erreur vient d'un code barre inexistant ou d'une erreur API 
 * Affichage d'un bouton cliquable permettant de revenir au menu
 
 <img src= "images/Erreur_code.png" width="300"> <img src= "images/Erreur_api.png" width="300"> 
@@ -60,6 +60,6 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 
 ### Cinquième écran
 
-* Lorsque l'on clique sur un ingredient, on est redirigé vers ce quatrième écran qui affiche le pourcentage maximum et minimum de l'ingrédient pouvant être présent dans le produit
+* Lorsque l'on clique sur un ingredient, on est redirigé vers ce cinquième écran qui affiche le pourcentage maximum et minimum de l'ingrédient pouvant être présent dans le produit
 
 <img src= "images/Detail.png" width="300">
