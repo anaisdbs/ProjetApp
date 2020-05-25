@@ -21,7 +21,6 @@ import com.squareup.picasso.Picasso;
 public class InfoProduit extends AppCompatActivity {
 
     private InfoProduitController controller2;
-    public String code;
 
     private TextView txtname;
     private TextView txtorigins;
@@ -29,7 +28,6 @@ public class InfoProduit extends AppCompatActivity {
     private TextView txtnutriscore;
     public Button buttonlist;
     public ImageView image_produit;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +40,6 @@ public class InfoProduit extends AppCompatActivity {
         txtnutriscore = findViewById(R.id.txtnutriscore);
         image_produit = findViewById(R.id.image_produit);
         buttonlist = findViewById(R.id.button);
-
-        Intent intent2 = getIntent();
-        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT);
 
         controller2 = new InfoProduitController(this,
                 Singletons.getGson(),
@@ -120,7 +115,7 @@ public class InfoProduit extends AppCompatActivity {
 
     public void navigateToIngredientsList() {
         Intent myIntent = new Intent(InfoProduit.this, IngredientsList.class);
-        myIntent.putExtra(Constant.KEY_CODE_PRODUIT, code);
+        myIntent.putExtra(Constant.KEY_CODE_PRODUIT, controller2.code);
         myIntent.putExtra(Constant.KEY_CODE2,controller2.ancien_code);
         InfoProduit.this.startActivity(myIntent);
     }

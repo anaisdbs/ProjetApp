@@ -27,18 +27,13 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
     private RecyclerView.LayoutManager layoutManager;
     public SearchView editsearch;
     private IngredientsListController controllerI;
-    public String code;
-    public String ancien_code;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_affichage_list);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-        Intent intent2 = getIntent();
-        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT);
-        ancien_code = intent2.getStringExtra(Constant.KEY_CODE2);
 
         controllerI = new IngredientsListController(this,
                 Singletons.getGson(),

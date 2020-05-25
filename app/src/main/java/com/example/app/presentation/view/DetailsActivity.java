@@ -1,14 +1,12 @@
 package com.example.app.presentation.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.app.Constant;
 import com.example.app.R;
-import com.example.app.Singletons;
+import com.example.app.presentation.controller.DetailsController;
 import com.example.app.presentation.model.Ingredients;
 
 
@@ -23,6 +21,8 @@ public class DetailsActivity extends AppCompatActivity {
     private Integer PourcentageMinInt;
     private String myIngredient;
 
+    private DetailsController controller;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +32,13 @@ public class DetailsActivity extends AppCompatActivity {
         txtDetail2 = findViewById(R.id.details_txt2);
         noming = findViewById(R.id.nom_ing);
 
-        Intent intent = getIntent();
-        String ingredientJson = intent.getStringExtra(Constant.KEY_INGREDIENTS);
-        Ingredients ingredients = Singletons.getGson().fromJson(ingredientJson, Ingredients.class);
+        controller = new DetailsController(
+                this
+        );
+        controller.onStart();
 
-        showName(ingredients);
-        showDetails(ingredients);
+        showName(controller.ingredients);
+        showDetails(controller.ingredients);
     }
 
     private void showName(Ingredients ingredients){

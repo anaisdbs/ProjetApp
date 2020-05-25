@@ -1,7 +1,7 @@
 package com.example.app.presentation.controller;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
-
 import com.example.app.Constant;
 import com.example.app.Singletons;
 import com.example.app.presentation.model.Ingredients;
@@ -9,10 +9,8 @@ import com.example.app.presentation.model.ResFoodResponse;
 import com.example.app.presentation.view.IngredientsList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import java.lang.reflect.Type;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,7 +22,8 @@ public class IngredientsListController {
     private IngredientsList view3;
     private String jsonIngredient;
     public String erreur;
-
+    public String code;
+    public String ancien_code;
 
 
     public IngredientsListController(IngredientsList ingredientsList, Gson gson, SharedPreferences sharedPreferences) {
@@ -33,12 +32,15 @@ public class IngredientsListController {
         this.sharedPreferences3 = sharedPreferences;
     }
 
-
     public void onStart(){
+
+        Intent intent2 = view3.getIntent();
+        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT);
+        ancien_code = intent2.getStringExtra(Constant.KEY_CODE2);
 
         List<Ingredients> ingredientsList = getDataFromCache();
 
-        if(ingredientsList != null && view3.ancien_code.equals(view3.code)) {
+        if(ingredientsList != null && ancien_code.equals(code)) {
               view3.showList(ingredientsList);
           } else {
               makeApiCall();
@@ -47,12 +49,12 @@ public class IngredientsListController {
 
     private void makeApiCall(){
 
-        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(view3.code);
+        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(code);
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
                 if (response.isSuccessful() && response.body().getProduct()!=null) {
-                    if(response.body().getProduct().getIngredients()==null){
+                    if(response.body().getProduct().getIngredients()==null){ //si la liste d'ingrédient est vide on est redirigé vers la page d'erreur
                         List<Ingredients> ingredientsList = null;
                         saveList(ingredientsList);
                         getDataFromCache();

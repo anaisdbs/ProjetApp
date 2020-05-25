@@ -1,5 +1,6 @@
 package com.example.app.presentation.controller;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Button;
 
@@ -9,11 +10,8 @@ import com.example.app.presentation.model.Ingredients;
 import com.example.app.presentation.model.Product;
 import com.example.app.presentation.model.ResFoodResponse;
 import com.example.app.presentation.view.InfoProduit;
-import com.example.app.presentation.view.IngredientsList;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +33,7 @@ public class InfoProduitController {
     public Product product;
     private String jsonProduit;
     public String erreur;
+    public String code;
 
     public InfoProduitController(InfoProduit infoProduit, Gson gson, SharedPreferences sharedPreferences) {
         this.view2 = infoProduit;
@@ -44,11 +43,14 @@ public class InfoProduitController {
 
     public void onStart(){
 
+        Intent intent2 = view2.getIntent();
+        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT);
+
         product = getDataFromCacheProduit();
 
         ancien_code = sharedPreferences2.getString(Constant.KEY_CODE, null);
 
-      if(product != null && ancien_code.equals(view2.code)) {
+      if(product != null && ancien_code.equals(code)) {
           view2.showProduit();
           view2.showImage();
           } else {
@@ -58,7 +60,7 @@ public class InfoProduitController {
 
     private void makeApiCall(){
 
-        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(view2.code);
+        Call<ResFoodResponse> call = Singletons.getFoodApi().getFoodResponse(code);
         call.enqueue(new Callback<ResFoodResponse>() {
             @Override
             public void onResponse(Call<ResFoodResponse> call, Response<ResFoodResponse> response) {
@@ -101,7 +103,7 @@ public class InfoProduitController {
     private void saveCode(){
         sharedPreferences2
                 .edit()
-                .putString(Constant.KEY_CODE, view2.code)
+                .putString(Constant.KEY_CODE, code)
                 .apply();
     }
 

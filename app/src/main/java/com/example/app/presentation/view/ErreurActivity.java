@@ -17,7 +17,6 @@ public class ErreurActivity extends AppCompatActivity {
 
     public Button retour_menu;
     private ErreurController controller;
-    private String erreur;
     private TextView textViewErreur;
 
     @Override
@@ -27,9 +26,6 @@ public class ErreurActivity extends AppCompatActivity {
 
         retour_menu = findViewById(R.id.button_menu);
         textViewErreur = findViewById(R.id.textViewErreur);
-
-        Intent intent2 = getIntent();
-        erreur = intent2.getStringExtra(Constant.ERROR_NAME);
 
         controller = new ErreurController(
                 this
@@ -52,7 +48,7 @@ public class ErreurActivity extends AppCompatActivity {
     }
 
     public void typeErreur(){
-        if (erreur.equals(Constant.ERROR_API)){
+        if (controller.erreur.equals(Constant.ERROR_API)){
             textViewErreur.setText(R.string.AlertApi);
         }else{
             textViewErreur.setText(R.string.AlertCode);
