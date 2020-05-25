@@ -53,8 +53,8 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 ### Quatrième écran
 
 * Affiche la liste des ingrédients présents dans le produit
-  * Une barre de recherche permet de chercher un produit en particulier
-  * Tous les ingrédients son cliquables 
+  * Une barre de recherche permet de chercher un ingrédient en particulier
+  * Tous les ingrédients sont cliquables 
  
 <img src= "images/Liste.png" width="300"> <img src= "images/Liste_keyboard.png" width="300">
 
