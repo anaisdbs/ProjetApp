@@ -40,7 +40,7 @@ https://world.openfoodfacts.org/api/v0/product/{code}.json
 * Affichage d'un message d'erreur différent si l'erreur vient d'un code barre inexistant ou d'une erreur api 
 * Affichage d'un bouton cliquable permettant de revenir au menu
 
-<img src= "images/Erreur.png" width="300"> <img src= "images/Erreur_api.png" width="300"> 
+<img src= "images/Erreur_code.png" width="300"> <img src= "images/Erreur_api.png" width="300"> 
 
 ### Troisième écran
 
