@@ -42,7 +42,6 @@ public class InfoProduitController {
         this.sharedPreferences2 = sharedPreferences;
     }
 
-
     public void onStart(){
 
         product = getDataFromCacheProduit();
@@ -77,19 +76,18 @@ public class InfoProduitController {
                     List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
                     saveList(ingredientsList);
 
-
                     view2.showProduit();
                     view2.showImage();
 
                 } else{
                     jsonProduit = null;
-                    erreur = "erreur produit";
+                    erreur = Constant.ERROR_PRODUCT;
                     view2.navigateToErreur();
                 }
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                erreur = "erreur api";
+                erreur = Constant.ERROR_API;
                 view2.navigateToErreur();
 
             }
@@ -132,7 +130,6 @@ public class InfoProduitController {
             return productsave;
         }
     }
-
 
     public void onButtonClick(Button button){
         view2.navigateToIngredientsList();

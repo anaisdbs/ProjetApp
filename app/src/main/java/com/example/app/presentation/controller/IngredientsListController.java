@@ -56,13 +56,13 @@ public class IngredientsListController {
                         List<Ingredients> ingredientsList = null;
                         saveList(ingredientsList);
                         getDataFromCache();
-                        erreur = "erreur produit";
+                        erreur = Constant.ERROR_PRODUCT;
                         view3.navigateToErreur();
                     }
                     else {
                         List<Ingredients> ingredientsList = response.body().getProduct().getIngredients();
                         saveList(ingredientsList);
-                        erreur = "erreur produit";
+                        erreur = Constant.ERROR_PRODUCT;
                         view3.showList(ingredientsList);
                     }
 
@@ -72,7 +72,7 @@ public class IngredientsListController {
             }
             @Override
             public void onFailure(Call<ResFoodResponse> call, Throwable t) {
-                erreur = "erreur api";
+                erreur = Constant.ERROR_API;
                 view3.navigateToErreur();
             }
         });
@@ -100,5 +100,4 @@ public class IngredientsListController {
     public void onItemClick(Ingredients ingredients) {
         view3.navigateToDetails(ingredients);
     }
-
 }

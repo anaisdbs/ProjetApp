@@ -13,7 +13,6 @@ import com.example.app.R;
 import com.example.app.presentation.controller.ErreurController;
 
 
-
 public class ErreurActivity extends AppCompatActivity {
 
     public Button retour_menu;
@@ -53,7 +52,7 @@ public class ErreurActivity extends AppCompatActivity {
     }
 
     public void typeErreur(){
-        if (erreur.equals("erreur api")){
+        if (erreur.equals(Constant.ERROR_API)){
             textViewErreur.setText(R.string.AlertApi);
         }else{
             textViewErreur.setText(R.string.AlertCode);

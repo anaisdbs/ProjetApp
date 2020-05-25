@@ -21,6 +21,7 @@ public class DetailsActivity extends AppCompatActivity {
     private Float PourcentageMin;
     private Integer PourcentageMaxInt;
     private Integer PourcentageMinInt;
+    private String myIngredient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +36,13 @@ public class DetailsActivity extends AppCompatActivity {
         String ingredientJson = intent.getStringExtra(Constant.KEY_INGREDIENTS);
         Ingredients ingredients = Singletons.getGson().fromJson(ingredientJson, Ingredients.class);
 
-
         showName(ingredients);
         showDetails(ingredients);
     }
 
     private void showName(Ingredients ingredients){
-        noming.setText(ingredients.getText());
+        myIngredient = ingredients.getText().replaceAll("_","");
+        noming.setText(myIngredient.substring(0,1).toUpperCase() + myIngredient.substring(1).toLowerCase());
     }
 
     private void showDetails(Ingredients ingredients) {
@@ -51,14 +52,14 @@ public class DetailsActivity extends AppCompatActivity {
 
         if (PourcentageMax != null) {
             PourcentageMaxInt = Math.round(ingredients.getPercent_max());
-            txtDetail1.setText((PourcentageMaxInt)+ "%");
+            txtDetail1.setText((PourcentageMaxInt)+ " %");
         } else {
             txtDetail1.setText("Le pourcentage max de l'ingrédient\n" +ingredients.getText()+ "\nest inconnu");
         }
 
         if (PourcentageMin != null) {
             PourcentageMinInt = Math.round(ingredients.getPercent_min());
-            txtDetail2.setText((PourcentageMinInt)+"%");
+            txtDetail2.setText((PourcentageMinInt)+" %");
         } else {
             txtDetail2.setText("Le pourcentage min de l'ingrédient\n" +ingredients.getText()+ "\nest inconnu");
         }

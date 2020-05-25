@@ -43,9 +43,8 @@ public class InfoProduit extends AppCompatActivity {
         image_produit = findViewById(R.id.image_produit);
         buttonlist = findViewById(R.id.button);
 
-
         Intent intent2 = getIntent();
-        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT); //if it's a string you stored.
+        code = intent2.getStringExtra(Constant.KEY_CODE_PRODUIT);
 
         controller2 = new InfoProduitController(this,
                 Singletons.getGson(),
@@ -125,6 +124,7 @@ public class InfoProduit extends AppCompatActivity {
         myIntent.putExtra(Constant.KEY_CODE2,controller2.ancien_code);
         InfoProduit.this.startActivity(myIntent);
     }
+
     public void navigateToErreur() {
         Intent myIntent = new Intent(InfoProduit.this, ErreurActivity.class);
         myIntent.putExtra(Constant.ERROR_NAME, controller2.erreur);

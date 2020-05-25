@@ -17,11 +17,9 @@ import com.example.app.presentation.controller.MainController;
 public class MainActivity extends AppCompatActivity {
 
     private MainController controller;
-
     public EditText coderentre;
     public Button recherche;
     public String coderentre_string;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 controller.onButtonClick(recherche);
             }
         });
-
     }
-
 
     public void navigateToInfoProduit(){
         controller.recupererCode();

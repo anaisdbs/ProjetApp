@@ -25,14 +25,10 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
     private RecyclerView recyclerView;
     private ListAdapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
-
     public SearchView editsearch;
-
     private IngredientsListController controllerI;
     public String code;
     public String ancien_code;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +47,6 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
         controllerI.onStart();
 
         createSearch();
-
     }
 
     private void createSearch(){
@@ -92,7 +87,6 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
         IngredientsList.this.startActivity(myIntent);
     }
 
-
     @Override
     public boolean onQueryTextSubmit(String query) { //
         return false;
@@ -103,6 +97,5 @@ public class IngredientsList extends AppCompatActivity implements SearchView.OnQ
         mAdapter.getFilter().filter(newText);
         return false;
     }
-
 
 }

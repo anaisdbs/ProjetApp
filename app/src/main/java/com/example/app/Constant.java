@@ -19,5 +19,10 @@ public class Constant {
 
     public static String ERROR_NAME = "erreur name";
 
+    public static String ERROR_PRODUCT = "erreur produit";
+
+    public static String ERROR_API = "erreur api";
+
+
 
 }

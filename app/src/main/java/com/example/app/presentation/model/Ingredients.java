@@ -7,7 +7,6 @@ public class Ingredients {
     private Float percent_max;
     private Float percent_min;
 
-
     public String getText() {
         return text;
     }

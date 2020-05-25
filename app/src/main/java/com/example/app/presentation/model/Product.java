@@ -43,8 +43,4 @@ public class Product {
     public List<Ingredients> getIngredients() {
         return ingredients;
     }
-
-
-
-
 }
